@@ -31,8 +31,10 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
         TextView title = customView.findViewById(R.id.cellTitle);
         ImageView firstImage = customView.findViewById(R.id.firstImage);
         ImageView secondImage = customView.findViewById(R.id.secondImage);
+        TextView descriptionTitle = customView.findViewById(R.id.descriptionTitle);
         TextView description = customView.findViewById(R.id.description);
         final int numOfMediaInDescription = 5;
+        String descriptionTitleText;
         String descriptionText = "";
 
         switch (getItem(position)) {
@@ -43,16 +45,21 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
                         if (i == numOfMediaInDescription) {
                             break;
                         }
-                        descriptionText += AppManager.shared.getNowPlayingMovies()[i].getTitle() + ", ";
+                        if (i!=0) {
+                            descriptionText += ", ";
+                        }
+                        descriptionText += AppManager.shared.getNowPlayingMovies()[i].getTitle();
                     }
                     GetImageFromURL getImageFromURL = new GetImageFromURL(firstImage);
                     getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[0].getImageUrl());
                     getImageFromURL = new GetImageFromURL(secondImage);
                     getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[1].getImageUrl());
+                    descriptionTitleText = AppManager.shared.getNowPlayingMovies().length + " movies in theaters today";
+                    descriptionTitle.setText(descriptionTitleText);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                descriptionText += "and more..";
+                descriptionText += " and more..";
                 description.setText(descriptionText);
                 break;
             case "TVShows":
@@ -62,16 +69,21 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
                         if (i == numOfMediaInDescription) {
                             break;
                         }
-                        descriptionText += AppManager.shared.getOnAirTVShows()[i].getTitle() + ", ";
+                        if (i!=0) {
+                            descriptionText += ", ";
+                        }
+                        descriptionText += AppManager.shared.getOnAirTVShows()[i].getTitle();
                     }
                     GetImageFromURL getImageFromURL = new GetImageFromURL(firstImage);
                     getImageFromURL.execute(AppManager.shared.getOnAirTVShows()[0].getImageUrl());
                     getImageFromURL = new GetImageFromURL(secondImage);
                     getImageFromURL.execute(AppManager.shared.getOnAirTVShows()[1].getImageUrl());
+                    descriptionTitleText = AppManager.shared.getOnAirTVShows().length + " shows you can watch today";
+                    descriptionTitle.setText(descriptionTitleText);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                descriptionText += "and more..";
+                descriptionText += " and more..";
                 description.setText(descriptionText);
                 break;
         }
