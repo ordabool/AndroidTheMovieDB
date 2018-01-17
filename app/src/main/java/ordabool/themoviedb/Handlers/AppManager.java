@@ -1,5 +1,7 @@
 package ordabool.themoviedb.Handlers;
 
+import org.json.JSONArray;
+
 import ordabool.themoviedb.Model.Movie;
 import ordabool.themoviedb.Model.TVShow;
 
@@ -18,6 +20,24 @@ public class AppManager {
 
     protected Movie[] nowPlayingMovies = null;
     protected TVShow[] onAirTVShows = null;
+    protected JSONArray moviesGenres = null;
+    protected JSONArray tvShowsGenres = null;
+
+    public JSONArray getMoviesGenres() {
+        return moviesGenres;
+    }
+
+    public void setMoviesGenres(JSONArray moviesGenres) {
+        this.moviesGenres = moviesGenres;
+    }
+
+    public JSONArray getTvShowsGenres() {
+        return tvShowsGenres;
+    }
+
+    public void setTvShowsGenres(JSONArray tvShowsGenres) {
+        this.tvShowsGenres = tvShowsGenres;
+    }
 
     public TVShow[] getOnAirTVShows() { return onAirTVShows; }
 

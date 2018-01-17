@@ -10,8 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import ordabool.themoviedb.AsyncFunctions.GetImageFromURL;
+import ordabool.themoviedb.Handlers.AppManager;
 import ordabool.themoviedb.Model.Media;
+import ordabool.themoviedb.Model.Movie;
+import ordabool.themoviedb.Model.TVShow;
 import ordabool.themoviedb.R;
 
 /**
@@ -42,7 +47,29 @@ public class FeaturedMediaListAdapter extends ArrayAdapter<Media> {
             mediaTitleTextView.setText(media.getTitle());
             mediaAverageRatingTextView.setText("Average Rating: " + media.getVoteAvg());
             mediaReleaseDateTextView.setText("Release Date: " + media.getReleaseDate());
-            mediaGenresTextView.setText("Genres: \n");
+            String mediaGenresText = "|";
+            for (int i=0; i<media.getGenres().length; i++){
+                if (media instanceof Movie){
+                    for (int j=0; j<AppManager.shared.getMoviesGenres().length(); j++){
+                        JSONObject job = (JSONObject) AppManager.shared.getMoviesGenres().get(j);
+                        if ((int)job.get("id") == media.getGenres()[i]){
+                            mediaGenresText += " " + job.get("name") + " |";
+                            break;
+                        }
+                    }
+                }
+                if (media instanceof TVShow){
+                    for (int j=0; j<AppManager.shared.getTvShowsGenres().length(); j++){
+                        JSONObject job = (JSONObject) AppManager.shared.getTvShowsGenres().get(j);
+                        if ((int)job.get("id") == media.getGenres()[i]){
+                            mediaGenresText += " " + job.get("name") + " |";
+                            break;
+                        }
+                    }
+                }
+
+            }
+            mediaGenresTextView.setText(mediaGenresText);
         } catch (Exception e) {
             e.printStackTrace();
         }

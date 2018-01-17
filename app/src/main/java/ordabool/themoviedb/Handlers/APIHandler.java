@@ -15,15 +15,23 @@ public class APIHandler {
 
     final static String nowPlayingMoviesConst = "movie/now_playing?";
     final static String onAirTVShowsConst = "tv/on_the_air?";
+    final static String moviesGenresConst = "genre/movie/list?";
+    final static String tvShowsGenresConst = "genre/tv/list?";
 
     public static String getNowPlayingMoviesUrlString() {
-        String urlString = APIHandler.requestBaseUrl + APIHandler.nowPlayingMoviesConst + APIHandler.APIKey;
-        return  urlString;
+        return  requestBaseUrl + nowPlayingMoviesConst + APIKey;
     }
 
     public static String getOnAirTVShowsUrlString() {
-        String urlString = APIHandler.requestBaseUrl + APIHandler.onAirTVShowsConst + APIHandler.APIKey;
-        return  urlString;
+        return  requestBaseUrl + onAirTVShowsConst + APIKey;
+    }
+
+    public static String getMoviesGenresUrlString() {
+        return requestBaseUrl + moviesGenresConst + APIKey;
+    }
+
+    public static String getTVShowsGenresUrlString() {
+        return requestBaseUrl + tvShowsGenresConst + APIKey;
     }
 
     public static URL getImageUrl(String path){

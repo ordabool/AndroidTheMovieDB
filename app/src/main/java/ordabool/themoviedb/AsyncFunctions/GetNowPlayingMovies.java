@@ -43,13 +43,18 @@ public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject job = (JSONObject) jsonArray.get(i);
+                JSONArray genresJSONArray = (JSONArray) job.get("genre_ids");
+                int[] genres = new int[genresJSONArray.length()];
+                for (int j=0; j<genresJSONArray.length(); j++){
+                    genres[j] = genresJSONArray.getInt(j);
+                }
                 Movie movie = new Movie(job.get("title").toString(),
                         Integer.parseInt(job.get("id").toString()),
                         job.get("release_date").toString(),
                         job.get("poster_path").toString(),
                         Float.parseFloat(job.get("vote_average").toString()),
                         job.get("overview").toString(),
-                        null,
+                        genres,
                         null);
                 nowPlayingMovies[i] = movie;
             }

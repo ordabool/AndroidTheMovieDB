@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ordabool.themoviedb.Adapters.FeaturedMediaAdapter;
+import ordabool.themoviedb.AsyncFunctions.GetMoviesGenres;
 import ordabool.themoviedb.AsyncFunctions.GetNowPlayingMovies;
 import ordabool.themoviedb.AsyncFunctions.GetOnAirTVShows;
 import ordabool.themoviedb.Handlers.AppManager;
