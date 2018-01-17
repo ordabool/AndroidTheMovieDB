@@ -11,24 +11,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import ordabool.themoviedb.Activities.MainActivity;
 import ordabool.themoviedb.Handlers.APIHandler;
 import ordabool.themoviedb.Handlers.AppManager;
-import ordabool.themoviedb.Activities.MainActivity;
-import ordabool.themoviedb.Model.Movie;
+import ordabool.themoviedb.Model.TVShow;
 
 /**
- * Created by Or on 16/01/2018.
+ * Created by Or on 17/01/2018.
  */
 
-public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
+public class GetOnAirTVShows extends AsyncTask<Void, Void, Void> {
 
     String data = "";
 
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL nowPlayingMoviesUrl = new URL(APIHandler.getNowPlayingMoviesUrlString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection) nowPlayingMoviesUrl.openConnection();
+            URL onAirTVShowsUrl = new URL(APIHandler.getOnAirTVShowsUrlString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) onAirTVShowsUrl.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
@@ -39,24 +39,24 @@ public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
 
             JSONObject jsonObject = new JSONObject(data);
             JSONArray jsonArray = (JSONArray) jsonObject.get("results");
-            Movie[] nowPlayingMovies = new Movie[jsonArray.length()];
+            TVShow[] onAirTVShows = new TVShow[jsonArray.length()];
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject job = (JSONObject) jsonArray.get(i);
-                Movie movie = new Movie(job.get("title").toString(),
+                TVShow tvShow = new TVShow(job.get("name").toString(),
                         Integer.parseInt(job.get("id").toString()),
-                        job.get("release_date").toString(),
+                        job.get("first_air_date").toString(),
                         job.get("poster_path").toString(),
                         Float.parseFloat(job.get("vote_average").toString()),
                         job.get("overview").toString(),
                         null,
-                        null);
-                nowPlayingMovies[i] = movie;
+                        null,
+                        0);
+                onAirTVShows[i] = tvShow;
             }
 
-            AppManager.shared.setNowPlayingMovies(nowPlayingMovies);
-
-        } catch (Exception e) {
+            AppManager.shared.setOnAirTVShows(onAirTVShows);
+        }catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -14,9 +14,15 @@ public class APIHandler {
     final static String youtubeBaseUrl = "https://www.youtube.com/watch?v=";
 
     final static String nowPlayingMoviesConst = "movie/now_playing?";
+    final static String onAirTVShowsConst = "tv/on_the_air?";
 
     public static String getNowPlayingMoviesUrlString() {
         String urlString = APIHandler.requestBaseUrl + APIHandler.nowPlayingMoviesConst + APIHandler.APIKey;
+        return  urlString;
+    }
+
+    public static String getOnAirTVShowsUrlString() {
+        String urlString = APIHandler.requestBaseUrl + APIHandler.onAirTVShowsConst + APIHandler.APIKey;
         return  urlString;
     }
 

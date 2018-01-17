@@ -32,7 +32,7 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
         ImageView firstImage = customView.findViewById(R.id.firstImage);
         ImageView secondImage = customView.findViewById(R.id.secondImage);
         TextView description = customView.findViewById(R.id.description);
-        final int numOfMoviesInDescription = 5;
+        final int numOfMediaInDescription = 5;
         String descriptionText = "";
 
         switch (getItem(position)) {
@@ -40,7 +40,7 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
                 title.setText("In Theaters");
                 try {
                     for(int i = 0; i < AppManager.shared.getNowPlayingMovies().length; i++){
-                        if (i == numOfMoviesInDescription) {
+                        if (i == numOfMediaInDescription) {
                             break;
                         }
                         descriptionText += AppManager.shared.getNowPlayingMovies()[i].getTitle() + ", ";
@@ -57,6 +57,22 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
                 break;
             case "TVShows":
                 title.setText("On TV");
+                try {
+                    for(int i = 0; i < AppManager.shared.getOnAirTVShows().length; i++){
+                        if (i == numOfMediaInDescription) {
+                            break;
+                        }
+                        descriptionText += AppManager.shared.getOnAirTVShows()[i].getTitle() + ", ";
+                    }
+                    GetImageFromURL getImageFromURL = new GetImageFromURL(firstImage);
+                    getImageFromURL.execute(AppManager.shared.getOnAirTVShows()[0].getImageUrl());
+                    getImageFromURL = new GetImageFromURL(secondImage);
+                    getImageFromURL.execute(AppManager.shared.getOnAirTVShows()[1].getImageUrl());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                descriptionText += "and more..";
+                description.setText(descriptionText);
                 break;
         }
         return customView;
