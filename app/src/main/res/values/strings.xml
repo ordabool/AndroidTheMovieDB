@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TheMovieDB</string>
+    <string name="open_drawer">Show Menu</string>
+    <string name="close_drawer">Close Menu</string>
 </resources>

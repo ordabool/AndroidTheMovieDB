@@ -12,13 +12,14 @@ import ordabool.themoviedb.AsyncFunctions.GetTVShowsGenres;
 import ordabool.themoviedb.Handlers.AppManager;
 import ordabool.themoviedb.R;
 
-public class FeaturedMediaList extends AppCompatActivity {
+public class FeaturedMediaList extends BaseActivity {
     public static ListView featuredListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_featured_media_list);
+        //setContentView(R.layout.activity_featured_media_list);
+        getLayoutInflater().inflate(R.layout.activity_featured_media_list, frameLayout);
         featuredListView = findViewById(R.id.featuredMediaList);
 
         GetMoviesGenres getMoviesGenres = new GetMoviesGenres();
