@@ -35,11 +35,16 @@ public class BaseActivity extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.featuredMediaItem:
-                        Toast.makeText(BaseActivity.this, "Featured", Toast.LENGTH_SHORT).show();
                         i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);
+                        //finish() - close one activity
+                        finishAffinity();
                         break;
-
+                    case R.id.popularMoviesItem:
+                        i = new Intent(getApplicationContext(), PopularMovies.class);
+                        startActivity(i);
+                        finishAffinity();
+                        break;
                 }
                 return false;
             }
