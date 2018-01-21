@@ -24,6 +24,18 @@ public class APIHandler {
     final static String movieConst = "movie/";
     final static String movieVideosConst = "/videos?";
 
+    final static String tvShowConst = "tv/";
+
+    final static String seasonConst = "/season/";
+
+    public static String getEpisodesUrlString(int tvShowId, int seasonNumber){
+        return requestBaseUrl + tvShowConst + tvShowId + seasonConst + seasonNumber + "?" + APIKey;
+    }
+
+    public static String getSeasonsUrlString(int id){
+        return requestBaseUrl + tvShowConst + id + "?" + APIKey;
+    }
+
     public static String getVideoUrlString(String key){
         return youtubeBaseUrl + key;
     }

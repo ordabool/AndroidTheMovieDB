@@ -13,4 +13,20 @@ public class TVShow extends Media {
         this.seasons = seasons;
         this.numberOfSeasons = numberOfSeasons;
     }
+
+    public Season[] getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(Season[] seasons) {
+        this.seasons = seasons;
+    }
+
+    public int getNumberOfSeasons() {
+        return numberOfSeasons;
+    }
+
+    public void setNumberOfSeasons(int numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
+    }
 }

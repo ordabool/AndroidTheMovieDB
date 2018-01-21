@@ -13,6 +13,7 @@ import ordabool.themoviedb.Adapters.FeaturedMediaListAdapter;
 import ordabool.themoviedb.AsyncFunctions.GetMoviesGenres;
 import ordabool.themoviedb.AsyncFunctions.GetTVShowsGenres;
 import ordabool.themoviedb.Handlers.AppManager;
+import ordabool.themoviedb.Model.TVShow;
 import ordabool.themoviedb.R;
 
 public class FeaturedMediaList extends BaseActivity {
@@ -53,6 +54,14 @@ public class FeaturedMediaList extends BaseActivity {
                         getTVShowsGenres.execute();
                     }
                     featuredListView.setAdapter(new FeaturedMediaListAdapter(this, AppManager.shared.getOnAirTVShows()));
+                    featuredListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(getApplicationContext(), TVShowActivity.class);
+                            TVShowActivity.tvShow = AppManager.shared.getOnAirTVShows()[i];
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
 

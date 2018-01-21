@@ -41,6 +41,10 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
             case "Movies":
                 title.setText("In Theaters");
                 try {
+                    GetImageFromURL getImageFromURL = new GetImageFromURL(firstImage);
+                    getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[0].getImageUrl());
+                    getImageFromURL = new GetImageFromURL(secondImage);
+                    getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[1].getImageUrl());
                     for(int i = 0; i < AppManager.shared.getNowPlayingMovies().length; i++){
                         if (i == numOfMediaInDescription) {
                             break;
@@ -50,10 +54,6 @@ public class FeaturedMediaAdapter extends ArrayAdapter<String> {
                         }
                         descriptionText += AppManager.shared.getNowPlayingMovies()[i].getTitle();
                     }
-                    GetImageFromURL getImageFromURL = new GetImageFromURL(firstImage);
-                    getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[0].getImageUrl());
-                    getImageFromURL = new GetImageFromURL(secondImage);
-                    getImageFromURL.execute(AppManager.shared.getNowPlayingMovies()[1].getImageUrl());
                     descriptionTitleText = AppManager.shared.getNowPlayingMovies().length + " movies in theaters today";
                     descriptionTitle.setText(descriptionTitleText);
                 } catch (Exception e) {
