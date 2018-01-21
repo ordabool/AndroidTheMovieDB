@@ -12,24 +12,25 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import ordabool.themoviedb.Activities.PopularMovies;
+import ordabool.themoviedb.Adapters.MediaGridAdapter;
 import ordabool.themoviedb.Handlers.APIHandler;
 import ordabool.themoviedb.Handlers.AppManager;
-import ordabool.themoviedb.Activities.MainActivity;
 import ordabool.themoviedb.Model.Movie;
 
 /**
- * Created by Or on 16/01/2018.
+ * Created by Or on 21/01/2018.
  */
 
-public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
+public class GetPopularMovies extends AsyncTask<Void, Void, Void> {
 
     String data = "";
 
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL nowPlayingMoviesUrl = new URL(APIHandler.getNowPlayingMoviesUrlString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection) nowPlayingMoviesUrl.openConnection();
+            URL popularMoviesUrl = new URL(APIHandler.getPopularMoviesUrlString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) popularMoviesUrl.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
@@ -40,7 +41,7 @@ public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
 
             JSONObject jsonObject = new JSONObject(data);
             JSONArray jsonArray = (JSONArray) jsonObject.get("results");
-            Movie[] nowPlayingMovies = new Movie[jsonArray.length()];
+            Movie[] popularMovies = new Movie[jsonArray.length()];
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject job = (JSONObject) jsonArray.get(i);
@@ -57,21 +58,20 @@ public class GetNowPlayingMovies extends AsyncTask<Void, Void, Void> {
                         job.get("overview").toString(),
                         genres,
                         null);
-                nowPlayingMovies[i] = movie;
+                popularMovies[i] = movie;
             }
 
-            AppManager.shared.setNowPlayingMovies(nowPlayingMovies);
+            AppManager.shared.setPopularMovies(popularMovies);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        MainActivity.featuredListView.invalidateViews();
+        PopularMovies.setGridAdapter();
     }
 }

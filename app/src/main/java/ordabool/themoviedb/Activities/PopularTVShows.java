@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.widget.GridView;
 
 import ordabool.themoviedb.Adapters.MediaGridAdapter;
-import ordabool.themoviedb.AsyncFunctions.GetPopularMovies;
+import ordabool.themoviedb.AsyncFunctions.GetPopularTVShows;
 import ordabool.themoviedb.Handlers.AppManager;
 import ordabool.themoviedb.R;
 
-public class PopularMovies extends BaseActivity {
+public class PopularTVShows extends BaseActivity {
 
     static GridView gridView;
     static Context context;
@@ -18,20 +18,20 @@ public class PopularMovies extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_popular_movies, frameLayout);
+        getLayoutInflater().inflate(R.layout.activity_popular_tvshows, frameLayout);
         context = getApplicationContext();
 
-        GetPopularMovies getPopularMovies = new GetPopularMovies();
-        getPopularMovies.execute();
+        GetPopularTVShows getPopularTVShows = new GetPopularTVShows();
+        getPopularTVShows.execute();
 
-        setTitle("Popular Movies");
+        setTitle("Popular TV Shows");
 
-        gridView = findViewById(R.id.popularMoviesGridView);
+        gridView = findViewById(R.id.popularTVShowsGridView);
         setGridAdapter();
     }
 
     public static void setGridAdapter() {
-        gridView.setAdapter(new MediaGridAdapter(AppManager.shared.getPopularMovies(), context));
+        gridView.setAdapter(new MediaGridAdapter(AppManager.shared.getPopularTVShow(), context));
         gridView.invalidateViews();
     }
 }

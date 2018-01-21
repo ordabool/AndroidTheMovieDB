@@ -45,6 +45,11 @@ public class BaseActivity extends AppCompatActivity {
                         startActivity(i);
                         finishAffinity();
                         break;
+                    case R.id.popularTVShowsItem:
+                        i = new Intent(getApplicationContext(), PopularTVShows.class);
+                        startActivity(i);
+                        finishAffinity();
+                        break;
                 }
                 return false;
             }

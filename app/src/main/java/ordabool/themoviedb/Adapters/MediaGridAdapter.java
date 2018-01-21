@@ -28,7 +28,10 @@ public class MediaGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return media.length;
+        if (media != null){
+            return media.length;
+        }
+        return 0;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class MediaGridAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View customView = layoutInflater.inflate(R.layout.grid_view_media_cell, viewGroup, false);
         ImageView mediaImageView = customView.findViewById(R.id.gridMediaImageView);
+        mediaImageView.setImageResource(R.mipmap.placeholder);
         TextView mediaTitleTextView = customView.findViewById(R.id.gridMediaTitleTextView);
         try {
             mediaTitleTextView.setText(media[i].getTitle());

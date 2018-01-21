@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@mipmap/placeholder"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="59dp" />
 
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@mipmap/placeholder"
             tools:layout_editor_absoluteX="192dp"
             tools:layout_editor_absoluteY="59dp" />
     </LinearLayout>

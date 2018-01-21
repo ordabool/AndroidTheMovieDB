@@ -20,8 +20,11 @@ public class AppManager {
 
     protected Movie[] nowPlayingMovies = null;
     protected TVShow[] onAirTVShows = null;
+    protected Movie[] popularMovies = null;
+    protected TVShow[] popularTVShow = null;
     protected JSONArray moviesGenres = null;
     protected JSONArray tvShowsGenres = null;
+
 
     public JSONArray getMoviesGenres() {
         return moviesGenres;
@@ -47,6 +50,22 @@ public class AppManager {
 
     public Movie[] getNowPlayingMovies() {
         return nowPlayingMovies;
+    }
+
+    public Movie[] getPopularMovies() {
+        return popularMovies;
+    }
+
+    public void setPopularMovies(Movie[] popularMovies) {
+        this.popularMovies = popularMovies;
+    }
+
+    public TVShow[] getPopularTVShow() {
+        return popularTVShow;
+    }
+
+    public void setPopularTVShow(TVShow[] popularTVShow) {
+        this.popularTVShow = popularTVShow;
     }
 
     public void setNowPlayingMovies(Movie[] nowPlayingMovies) {
