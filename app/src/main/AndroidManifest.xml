@@ -29,7 +29,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Activities.PopularMovies" />
-        <activity android:name=".Activities.PopularTVShows"></activity>
+        <activity android:name=".Activities.PopularTVShows" />
+        <activity android:name=".Activities.MovieActivity"></activity>
     </application>
 
 </manifest>

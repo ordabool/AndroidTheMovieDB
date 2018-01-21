@@ -1,8 +1,11 @@
 package ordabool.themoviedb.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import ordabool.themoviedb.Adapters.MediaGridAdapter;
@@ -27,6 +30,14 @@ public class PopularMovies extends BaseActivity {
         setTitle("Popular Movies");
 
         gridView = findViewById(R.id.popularMoviesGridView);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                MovieActivity.movie = AppManager.shared.getPopularMovies()[i];
+                startActivity(intent);
+            }
+        });
         setGridAdapter();
     }
 

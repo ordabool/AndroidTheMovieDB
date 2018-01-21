@@ -1,7 +1,10 @@
 package ordabool.themoviedb.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -36,6 +39,14 @@ public class FeaturedMediaList extends BaseActivity {
                 case "Movies":
                     this.setTitle("In Theaters");
                     featuredListView.setAdapter(new FeaturedMediaListAdapter(this, AppManager.shared.getNowPlayingMovies()));
+                    featuredListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+                            MovieActivity.movie = AppManager.shared.getNowPlayingMovies()[i];
+                            startActivity(intent);
+                        }
+                    });
                     break;
                 case "TVShows":
                     this.setTitle("On TV");

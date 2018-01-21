@@ -11,4 +11,12 @@ public class Movie extends Media {
         super(title, id, releaseDate, imagePath, voteAvg, overview, genres);
         this.videos = videos;
     }
+
+    public Video[] getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Video[] videos) {
+        this.videos = videos;
+    }
 }
