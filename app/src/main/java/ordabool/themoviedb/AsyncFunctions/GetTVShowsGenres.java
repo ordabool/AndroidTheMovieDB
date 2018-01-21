@@ -1,6 +1,8 @@
 package ordabool.themoviedb.AsyncFunctions;
 
 import android.os.AsyncTask;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +24,17 @@ import ordabool.themoviedb.Handlers.AppManager;
 public class GetTVShowsGenres extends AsyncTask<Void, Void, Void> {
 
     String data = "";
+    ListView listView;
+    BaseAdapter baseAdapter;
+
+    public GetTVShowsGenres(ListView listView, BaseAdapter baseAdapter) {
+        this.listView = listView;
+        this.baseAdapter = baseAdapter;
+    }
+
+    public GetTVShowsGenres(ListView listView) {
+        this.listView = listView;
+    }
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -47,6 +60,10 @@ public class GetTVShowsGenres extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        FeaturedMediaList.featuredListView.invalidateViews();
+        if (baseAdapter == null) {
+            listView.invalidateViews();
+        } else {
+            listView.setAdapter(baseAdapter);
+        }
     }
 }

@@ -25,12 +25,6 @@ public class FeaturedMediaList extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_featured_media_list, frameLayout);
         featuredListView = findViewById(R.id.featuredMediaList);
 
-        GetMoviesGenres getMoviesGenres = new GetMoviesGenres();
-        getMoviesGenres.execute();
-
-        GetTVShowsGenres getTVShowsGenres = new GetTVShowsGenres();
-        getTVShowsGenres.execute();
-
         String mediaType;
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -38,6 +32,10 @@ public class FeaturedMediaList extends BaseActivity {
             switch (mediaType) {
                 case "Movies":
                     this.setTitle("In Theaters");
+                    if (AppManager.shared.getMoviesGenres() == null) {
+                        GetMoviesGenres getMoviesGenres = new GetMoviesGenres(featuredListView);
+                        getMoviesGenres.execute();
+                    }
                     featuredListView.setAdapter(new FeaturedMediaListAdapter(this, AppManager.shared.getNowPlayingMovies()));
                     featuredListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -50,6 +48,10 @@ public class FeaturedMediaList extends BaseActivity {
                     break;
                 case "TVShows":
                     this.setTitle("On TV");
+                    if (AppManager.shared.getTvShowsGenres() == null) {
+                        GetTVShowsGenres getTVShowsGenres = new GetTVShowsGenres(featuredListView);
+                        getTVShowsGenres.execute();
+                    }
                     featuredListView.setAdapter(new FeaturedMediaListAdapter(this, AppManager.shared.getOnAirTVShows()));
                     break;
             }

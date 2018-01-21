@@ -1,6 +1,11 @@
 package ordabool.themoviedb.AsyncFunctions;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Adapter;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -11,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 
 import ordabool.themoviedb.Activities.FeaturedMediaList;
 import ordabool.themoviedb.Handlers.APIHandler;
@@ -23,6 +30,17 @@ import ordabool.themoviedb.Handlers.AppManager;
 public class GetMoviesGenres extends AsyncTask<Void, Void, Void> {
 
     String data = "";
+    ListView listView;
+    BaseAdapter baseAdapter;
+
+    public GetMoviesGenres(ListView listView, BaseAdapter baseAdapter) {
+        this.listView = listView;
+        this.baseAdapter = baseAdapter;
+    }
+
+    public GetMoviesGenres(ListView listView) {
+        this.listView = listView;
+    }
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -48,6 +66,10 @@ public class GetMoviesGenres extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        FeaturedMediaList.featuredListView.invalidateViews();
+        if (baseAdapter == null) {
+            listView.invalidateViews();
+        } else {
+            listView.setAdapter(baseAdapter);
+        }
     }
 }

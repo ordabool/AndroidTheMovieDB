@@ -21,6 +21,17 @@ public class APIHandler {
     final static String moviesGenresConst = "genre/movie/list?";
     final static String tvShowsGenresConst = "genre/tv/list?";
 
+    final static String movieConst = "movie/";
+    final static String movieVideosConst = "/videos?";
+
+    public static String getVideoUrlString(String key){
+        return youtubeBaseUrl + key;
+    }
+
+    public static String getMovieVideosUrlString(int id){
+        return requestBaseUrl + movieConst + id + movieVideosConst + APIKey;
+    }
+
     public static String getNowPlayingMoviesUrlString() {
         return  requestBaseUrl + nowPlayingMoviesConst + APIKey;
     }

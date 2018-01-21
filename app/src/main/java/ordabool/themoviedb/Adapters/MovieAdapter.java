@@ -1,6 +1,8 @@
 package ordabool.themoviedb.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +33,10 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (movie.getVideos() != null) {
-            return movie.getVideos().length+1;
-        } else {
+        if (movie.getVideos() == null) {
             return 1;
+        } else {
+            return movie.getVideos().length+1;
         }
     }
 
@@ -86,6 +88,11 @@ public class MovieAdapter extends BaseAdapter {
             }
             return customView;
         }
-        return null;
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View customView = layoutInflater.inflate(R.layout.video_base_cell, viewGroup, false);
+        TextView videoNameTextView = customView.findViewById(R.id.videoNameTextView);
+        videoNameTextView.setText(movie.getVideos()[i-1].getName());
+        return customView;
     }
 }
