@@ -29,7 +29,7 @@ public class GetPopularTVShows extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL popularTVShowsUrl = new URL(APIHandler.getOnAirTVShowsUrlString());
+            URL popularTVShowsUrl = new URL(APIHandler.getPopularTVShowsUrlString());
             HttpURLConnection httpURLConnection = (HttpURLConnection) popularTVShowsUrl.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
