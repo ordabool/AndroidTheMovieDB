@@ -25,8 +25,19 @@ public class APIHandler {
     final static String movieVideosConst = "/videos?";
 
     final static String tvShowConst = "tv/";
-
     final static String seasonConst = "/season/";
+
+    final static String movieSearchConst = "search/movie?";
+    final static String tvShowSearchConst = "search/tv?";
+    final static String queryConst = "&query=";
+
+    public static String getTvShowSearchUrlString(String query) {
+        return AppManager.shared.replaceSearchStr(requestBaseUrl + tvShowSearchConst + APIKey + queryConst + query);
+    }
+
+    public static String getMovieSearchUrlString(String query) {
+        return AppManager.shared.replaceSearchStr(requestBaseUrl + movieSearchConst + APIKey + queryConst + query);
+    }
 
     public static String getEpisodesUrlString(int tvShowId, int seasonNumber){
         return requestBaseUrl + tvShowConst + tvShowId + seasonConst + seasonNumber + "?" + APIKey;

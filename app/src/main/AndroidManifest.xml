@@ -32,7 +32,8 @@
         <activity android:name=".Activities.PopularTVShows" />
         <activity android:name=".Activities.MovieActivity" />
         <activity android:name=".Activities.TVShowActivity" />
-        <activity android:name=".Activities.SeasonActivity"></activity>
+        <activity android:name=".Activities.SeasonActivity" />
+        <activity android:name=".Activities.SearchActivity"></activity>
     </application>
 
 </manifest>

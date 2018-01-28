@@ -2,6 +2,7 @@ package ordabool.themoviedb.Handlers;
 
 import org.json.JSONArray;
 
+import ordabool.themoviedb.Model.Media;
 import ordabool.themoviedb.Model.Movie;
 import ordabool.themoviedb.Model.TVShow;
 
@@ -24,10 +25,22 @@ public class AppManager {
     protected TVShow[] popularTVShow = null;
     protected JSONArray moviesGenres = null;
     protected JSONArray tvShowsGenres = null;
+    protected Media[] searchResult = null;
 
+    public Media[] getSearchResult() {
+        return searchResult;
+    }
+
+    public void setSearchResult(Media[] searchResult) {
+        this.searchResult = searchResult;
+    }
 
     public JSONArray getMoviesGenres() {
         return moviesGenres;
+    }
+
+    public String replaceSearchStr(String searchStr){
+        return searchStr.replaceAll(" ", "%20");
     }
 
     public void setMoviesGenres(JSONArray moviesGenres) {

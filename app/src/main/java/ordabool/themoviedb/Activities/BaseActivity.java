@@ -50,6 +50,11 @@ public class BaseActivity extends AppCompatActivity {
                         startActivity(i);
                         finishAffinity();
                         break;
+                    case R.id.searchItem:
+                        i = new Intent(getApplicationContext(), SearchActivity.class);
+                        startActivity(i);
+                        finishAffinity();
+                        break;
                 }
                 return false;
             }
