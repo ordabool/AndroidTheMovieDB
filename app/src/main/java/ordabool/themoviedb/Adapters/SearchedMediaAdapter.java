@@ -79,7 +79,7 @@ public class SearchedMediaAdapter extends BaseAdapter {
                 if (media instanceof TVShow){
                     for (int j=0; j<AppManager.shared.getTvShowsGenres().length(); j++){
                         JSONObject job = (JSONObject) AppManager.shared.getTvShowsGenres().get(j);
-                        if ((int)job.get("id") == media.getGenres()[i]){
+                        if ((int)job.get("id") == media.getGenres()[k]){
                             mediaGenresText += " " + job.get("name") + " |";
                             break;
                         }

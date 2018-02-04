@@ -20,6 +20,7 @@ import ordabool.themoviedb.Handlers.APIHandler;
 import ordabool.themoviedb.Handlers.AppManager;
 import ordabool.themoviedb.Model.Media;
 import ordabool.themoviedb.Model.Movie;
+import ordabool.themoviedb.Model.TVShow;
 
 /**
  * Created by Or on 28/01/2018.
@@ -61,14 +62,15 @@ public class GetSearchResults extends AsyncTask<String, Void, Void> {
                 for (int j=0; j<genresJSONArray.length(); j++){
                     genres[j] = genresJSONArray.getInt(j);
                 }
-                Media media = new Media(job.get("title").toString(),
+                Movie movie = new Movie(job.get("title").toString(),
                         Integer.parseInt(job.get("id").toString()),
                         job.get("release_date").toString(),
                         job.get("poster_path").toString(),
                         Float.parseFloat(job.get("vote_average").toString()),
                         job.get("overview").toString(),
-                        genres);
-                movieResults[i] = media;
+                        genres,
+                        null);
+                movieResults[i] = movie;
             }
 
         } catch (Exception e) {
@@ -98,14 +100,16 @@ public class GetSearchResults extends AsyncTask<String, Void, Void> {
                 for (int j=0; j<genresJSONArray.length(); j++){
                     genres[j] = genresJSONArray.getInt(j);
                 }
-                Media media = new Media(job.get("name").toString(),
+                TVShow tvShow = new TVShow(job.get("name").toString(),
                         Integer.parseInt(job.get("id").toString()),
                         job.get("first_air_date").toString(),
                         job.get("poster_path").toString(),
                         Float.parseFloat(job.get("vote_average").toString()),
                         job.get("overview").toString(),
-                        genres);
-                tvShowResults[i] = media;
+                        genres,
+                        null,
+                        0);
+                tvShowResults[i] = tvShow;
             }
 
         } catch (Exception e) {

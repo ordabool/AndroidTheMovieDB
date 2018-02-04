@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 
 import ordabool.themoviedb.Adapters.FeaturedMediaListAdapter;
 import ordabool.themoviedb.Adapters.SearchedMediaAdapter;
+import ordabool.themoviedb.AsyncFunctions.GetMoviesGenres;
 import ordabool.themoviedb.AsyncFunctions.GetSearchResults;
+import ordabool.themoviedb.AsyncFunctions.GetTVShowsGenres;
 import ordabool.themoviedb.Handlers.AppManager;
 import ordabool.themoviedb.Model.Media;
 import ordabool.themoviedb.Model.Movie;
@@ -36,6 +39,15 @@ public class SearchActivity extends BaseActivity {
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
         resultsListView = findViewById(R.id.searchResultsTableView);
+        if (AppManager.shared.getMoviesGenres() == null) {
+            GetMoviesGenres getMoviesGenres = new GetMoviesGenres(resultsListView);
+            getMoviesGenres.execute();
+        }
+        if (AppManager.shared.getTvShowsGenres() == null) {
+            GetTVShowsGenres getTVShowsGenres = new GetTVShowsGenres(resultsListView);
+            getTVShowsGenres.execute();
+        }
+
         resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -60,6 +72,10 @@ public class SearchActivity extends BaseActivity {
                 } else {
                     GetSearchResults getSearchResults = new GetSearchResults(getApplicationContext());
                     getSearchResults.execute(searchEditText.getText().toString());
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                 }
 
             }
