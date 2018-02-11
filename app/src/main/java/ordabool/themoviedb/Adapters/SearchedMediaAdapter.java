@@ -35,7 +35,12 @@ public class SearchedMediaAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return AppManager.shared.getSearchResult().length;
+        if (AppManager.shared.getSearchResult() != null){
+            return AppManager.shared.getSearchResult().length;
+        } else {
+            return 0;
+        }
+
     }
 
     @Override
